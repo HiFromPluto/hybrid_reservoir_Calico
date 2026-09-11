@@ -1,0 +1,33 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "arms": [
+    {
+      "id": "CLOSED_D50",
+      "d": 0.5,
+      "height_um": 1.65,
+      "v_um_s": 0.0,
+      "v_um_min": 0.0,
+      "role": "closed_replay",
+      "notes": "v=0. Expect D50-class ALIVE on the 14400 s window. If DEAD, port broke."
+    },
+    {
+      "id": "FLOW_180",
+      "d": 0.5,
+      "height_um": 1.65,
+      "v_um_s": 3.0,
+      "v_um_min": 180.0,
+      "role": "low_flow",
+      "notes": "Danino low channel speed 180 um/min."
+    },
+    {
+      "id": "FLOW_296",
+      "d": 0.5,
+      "height_um": 1.65,
+      "v_um_s": 4.93,
+      "v_um_min": 296.0,
+      "role": "high_flow",
+      "notes": "Danino high channel speed 296 um/min. Identity: T(296)>T(180)."
+    }
+  ]
+}

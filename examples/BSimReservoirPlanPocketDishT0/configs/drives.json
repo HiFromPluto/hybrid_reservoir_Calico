@@ -1,0 +1,23 @@
+{
+  "no_task_labels": true,
+  "drives": [
+    {
+      "id": "STEP_ON",
+      "u_hold": 0.5,
+      "t_on_s": 9000.0,
+      "t_off_s": 0.0,
+      "r_Ru": "NA",
+      "plateau_last_fraction": 0.10,
+      "plateau_R_rel_tol": 0.05,
+      "notes": "Occupancy drive. r(R,u) is NA because u does not vary."
+    },
+    {
+      "id": "SINGLE_PULSE",
+      "u_hold": 1.0,
+      "t_on_s": 75.0,
+      "t_off_s": 1500.0,
+      "r_Ru": "pearson_meanR_vs_u",
+      "notes": "Leak vs decay. Expect AHL_rel << L_rel (WashoutReset)."
+    }
+  ]
+}

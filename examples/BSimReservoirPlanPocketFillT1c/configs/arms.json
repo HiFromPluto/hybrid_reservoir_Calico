@@ -1,0 +1,27 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "arms": [
+    {
+      "id": "VOLUMETRIC_FLUSH",
+      "kind": "flush",
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "notes": "T1 OPEN_BUS_3 replay. Expect DEAD. If ALIVE, the port broke."
+    },
+    {
+      "id": "VOLUMETRIC_CLOSED",
+      "kind": "closed",
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "notes": "Primary. Pocket only, no-flux walls, Danino k. Door vs circuit."
+    },
+    {
+      "id": "VOLUMETRIC_W20",
+      "kind": "w20",
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "notes": "T2 W20_L20 stencil, same QS_*. Predeclared with closed; not a W hunt."
+    }
+  ]
+}

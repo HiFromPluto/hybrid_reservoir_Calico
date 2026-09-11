@@ -1,0 +1,126 @@
+{
+  "frozen_before_traces": true,
+  "gate": "B1",
+  "status_label": "B1_PAINT_HOLD",
+  "object": "LANE_B_CHEMOTACTIC_SPATIAL",
+  "device": "LANE_B_MM_DISH_FLOW0",
+  "parent_fail": "B0_MOTILITY_MEMORY",
+  "NOT_FIG4B": true,
+  "not_danino": true,
+  "not_c1c": true,
+  "not_a1": true,
+  "not_hybrid_dish_hill": true,
+  "not_paper1_charc_rewrite": true,
+  "not_lane_a": true,
+  "not_b0_rewrite": true,
+  "narma": false,
+  "charc": false,
+  "ipc": false,
+  "growth_division_death": false,
+  "ahl": false,
+  "qs": false,
+  "lanes_review_section4_identity": false,
+  "stokes_d_066": false,
+  "contrast_182x": false,
+  "tau_mix_equals_L2_over_4_mu0": false,
+  "window_300s": false,
+  "kernel": "BSimTransportField",
+  "scheduler": "BSimStepScheduler",
+  "rng_seed": 0,
+  "dish_um": [
+    1000.0,
+    500.0,
+    10.0
+  ],
+  "flow_um_s": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pde_grid": [
+    100,
+    50,
+    1
+  ],
+  "pde_dx_um": [
+    10.0,
+    10.0,
+    10.0
+  ],
+  "readout_grid": [
+    20,
+    10
+  ],
+  "lambda_um": 50.0,
+  "T_K": 305.0,
+  "eta_Pa_s": 0.0027,
+  "dt_s": 0.02,
+  "sample_dt_s": 0.1,
+  "D_att_um2_s": 800.0,
+  "D_rep_um2_s": 800.0,
+  "k_att_s": 0.0,
+  "k_rep_s": 0.0,
+  "ac_count": 4,
+  "ac_immobilized": true,
+  "ac_internal_ode": false,
+  "J_max": 20000.0,
+  "J_max_provenance": "ENGINEERING_copied_from_B0_not_fitted",
+  "t_off_s": 60.0,
+  "t_occ_s": 60.0,
+  "T_mix_s": 180.0,
+  "stripe_wavelength_um": 200.0,
+  "stripe_high_um": 100.0,
+  "observe_cap_s": 400.0,
+  "T_hold_s": 275.3,
+  "T_hold_status": "SCOUT_SET_BEFORE_MOTILE_TRACES",
+  "kappa_field_hold_max": 0.15,
+  "ac_layout": [
+    {
+      "x": 200.0,
+      "y": 150.0,
+      "z": 5.0,
+      "payload": "ATTRACTANT"
+    },
+    {
+      "x": 200.0,
+      "y": 350.0,
+      "z": 5.0,
+      "payload": "ATTRACTANT"
+    },
+    {
+      "x": 800.0,
+      "y": 150.0,
+      "z": 5.0,
+      "payload": "REPELLENT"
+    },
+    {
+      "x": 800.0,
+      "y": 350.0,
+      "z": 5.0,
+      "payload": "REPELLENT"
+    }
+  ],
+  "chemo_alpha": 2.0,
+  "chemo_kr": 0.05,
+  "chemo_kb": 0.05,
+  "chemo_ka": 1.0,
+  "chemo_gamma_y": 0.5,
+  "chemo_tau_a": 0.5,
+  "n_density": 1200,
+  "kappa_motile_min": 0.12,
+  "kappa_motile_minus_field_min": 0.08,
+  "kappa_motile_minus_off_min": 0.08,
+  "kappa_silent_max": 0.08,
+  "ledger_rel_tol": 0.001,
+  "arms": [
+    "B1_MIX_STRIPE",
+    "B1_PAINT_MOTILE",
+    "B1_PAINT_OFF",
+    "B1_PAINT_FIELD",
+    "B1_PAINT_SILENT"
+  ],
+  "b1_pass_starts_narma": false,
+  "b0_overall_rewrite": false,
+  "kappa_field_scout_at_T_hold": 0.14989078227854202,
+  "kappa_field_scout_at_t_off": 0.8331185613772963
+}

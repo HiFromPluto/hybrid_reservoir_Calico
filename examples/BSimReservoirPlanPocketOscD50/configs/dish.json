@@ -1,0 +1,19 @@
+{
+  "name": "PocketOsc-D50",
+  "footprint_um": [100.0, 100.0],
+  "claim_height_um": 1.65,
+  "replay_height_um": 10.0,
+  "claim_d": 0.5,
+  "replay_d": 0.05,
+  "cell_vol_um3": 1.0,
+  "cell_vol_class": "ENGINEERING",
+  "D_um2_s": 159.0,
+  "k_danino_s": 4.6e-5,
+  "k_danino_note": "2.76e-3 / 60 from D1g",
+  "molecules_per_um3_per_uM": 602.2,
+  "QS_KMLA": 0.01,
+  "do_not_retune": true,
+  "no_bath": true,
+  "no_ac": true,
+  "no_bus": true
+}

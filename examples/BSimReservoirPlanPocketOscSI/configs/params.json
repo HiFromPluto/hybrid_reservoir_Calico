@@ -1,0 +1,41 @@
+{
+  "source": "examples/PocketDish/DANINO_SI_MODEL.md TAKEN scaled table",
+  "time": "SI-scaled; do not convert with D1g TIME_ADJ=60",
+  "C_A": 1.0,
+  "C_I": 4.0,
+  "delta": 0.001,
+  "alpha": 2500.0,
+  "tau": 10.0,
+  "k": 1.0,
+  "k1": 0.1,
+  "b": 0.06,
+  "gamma_A": 15.0,
+  "gamma_I": 24.0,
+  "gamma_H": 0.01,
+  "f": 0.3,
+  "g": 0.01,
+  "d0": 0.88,
+  "D_membrane": 2.5,
+  "d": 0.5,
+  "D1_bulk": 0.0,
+  "t_end": 1000.0,
+  "t_discard": 200.0,
+  "sample_dt": 0.5,
+  "peak_min_spacing": 5.0,
+  "peak_rel_prominence": 0.10,
+  "min_peaks": 3,
+  "ics": {
+    "class": "ENGINEERING",
+    "A": 0.0,
+    "I": 0.0,
+    "H_i": 1.0,
+    "H_e": 1.0,
+    "H_i_history": 1.0
+  },
+  "integrator": {
+    "method": "scipy_method_of_steps_BDF",
+    "rtol": 1e-7,
+    "atol": 1e-9,
+    "max_step": 0.1
+  }
+}

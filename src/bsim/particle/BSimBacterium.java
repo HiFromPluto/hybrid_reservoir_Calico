@@ -144,8 +144,11 @@ public class BSimBacterium extends BSimParticle {
 	 * Causes the cell to rotate such that Var(theta(dt)) = 4*D*dt.
 	 */
 	public void rotationalDiffusion() {
-		double dTheta = rng.nextGaussian()*Math.sqrt(4*BSim.BOLTZMANN*sim.getTemperature()*sim.getDt()/rotationalStokesCoefficient())*Math.pow(10,9);
-		BSimUtils.rotatePerp(direction, dTheta);
+		double gaussian = sim.hasInjectedRandom()
+				? sim.getRandom().nextGaussian() : rng.nextGaussian();
+		double dTheta = gaussian*Math.sqrt(4*BSim.BOLTZMANN*sim.getTemperature()
+				*sim.getDt()/rotationalStokesCoefficient())*Math.pow(10,9);
+		BSimUtils.rotatePerp(direction, dTheta, sim.getRandom());
 	}
 	
 	public double rotationalStokesCoefficient() {
@@ -164,7 +167,8 @@ public class BSimBacterium extends BSimParticle {
 		
 		double tumbleAngle;
 		do {
-			tumbleAngle = BSimUtils.sampleGamma(tumbleShape, tumbleScale) + tumbleLocation;
+			tumbleAngle = BSimUtils.sampleGamma(
+					tumbleShape, tumbleScale, sim.getRandom()) + tumbleLocation;
 		} while (tumbleAngle > 180);		
 		
 		return Math.toRadians(tumbleAngle);
@@ -221,14 +225,16 @@ public class BSimBacterium extends BSimParticle {
 	
 	/** Sets the radius so that the surface area of the bacterium is randomly distributed between surfaceArea(replicationRadius)/2 and surfaceArea(replicationRadius) */  
 	public void setRadius() {
-		setRadiusFromSurfaceArea(surfaceArea(replicationRadius)/2 + Math.random()*surfaceArea(replicationRadius)/2);
+		setRadiusFromSurfaceArea(surfaceArea(replicationRadius)/2
+				+ sim.getRandom().nextDouble()*surfaceArea(replicationRadius)/2);
 	}	
 	
 	public void grow() {
 		double dS = surfaceAreaGrowthRate*sim.getDt();
 		setRadiusFromSurfaceArea(getSurfaceArea() + dS);
 
-		if(pVesicle > 0 && Math.random() < pVesicle*(dS/typicalVesicleSurfaceArea))
+		if(pVesicle > 0 && sim.getRandom().nextDouble()
+				< pVesicle*(dS/typicalVesicleSurfaceArea))
 			vesiculate();
 		
 		if (radius > replicationRadius)
@@ -284,7 +290,8 @@ public class BSimBacterium extends BSimParticle {
 	public BSimBacterium(BSim sim, Vector3d position) {
 		super(sim, position, 1); // default radius 1 micron
 		setMotionState(MotionState.RUNNING);
-		setDirection(new Vector3d(0.5-Math.random(),0.5-Math.random(),0.5-Math.random()));	
+		setDirection(new Vector3d(0.5-sim.getRandom().nextDouble(),
+				0.5-sim.getRandom().nextDouble(),0.5-sim.getRandom().nextDouble()));
 	}				
 		
 	@Override
@@ -293,13 +300,13 @@ public class BSimBacterium extends BSimParticle {
 		
 		switch(motionState) {
 		case RUNNING:
-			if(Math.random() < pEndRun()*sim.getDt())
+			if(sim.getRandom().nextDouble() < pEndRun()*sim.getDt())
 				motionState = MotionState.TUMBLING;
 			break;
 		case TUMBLING:
-			if(Math.random() < pEndTumble()*sim.getDt()) {
+			if(sim.getRandom().nextDouble() < pEndTumble()*sim.getDt()) {
 				/* Change the direction at the end of a tumble phase */
-				BSimUtils.rotatePerp(direction, tumbleAngle());
+				BSimUtils.rotatePerp(direction, tumbleAngle(), sim.getRandom());
 				motionState = MotionState.RUNNING;
 			}
 			break;

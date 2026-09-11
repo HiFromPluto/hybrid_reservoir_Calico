@@ -1,0 +1,36 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "d": 0.5,
+  "D1": 0.0,
+  "identity_ids": [
+    "MU_1p0", "MU_1p1", "MU_1p2", "MU_1p3", "MU_1p4",
+    "MU_1p5", "MU_1p6", "MU_1p7", "MU_1p8", "MU_1p9", "MU_2p0"
+  ],
+  "extra_ids": [
+    "MU_0", "MU_0p25", "MU_0p5", "MU_0p75",
+    "MU_2p25", "MU_2p5", "MU_3p0", "MU_4p0", "MU_5p0"
+  ],
+  "arms": [
+    {"id": "MU_0", "mu": 0.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "closed analog; report only"},
+    {"id": "MU_0p25", "mu": 0.25, "role": "FINITE_INTERVAL_EXTRA", "notes": "low mu extra"},
+    {"id": "MU_0p5", "mu": 0.5, "role": "FINITE_INTERVAL_EXTRA", "notes": "low mu extra"},
+    {"id": "MU_0p75", "mu": 0.75, "role": "FINITE_INTERVAL_EXTRA", "notes": "below identity"},
+    {"id": "MU_1p0", "mu": 1.0, "role": "IDENTITY", "notes": "Fig.4 identity start"},
+    {"id": "MU_1p1", "mu": 1.1, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p2", "mu": 1.2, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p3", "mu": 1.3, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p4", "mu": 1.4, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p5", "mu": 1.5, "role": "IDENTITY", "notes": "tolerance and fixture mu"},
+    {"id": "MU_1p6", "mu": 1.6, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p7", "mu": 1.7, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p8", "mu": 1.8, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_1p9", "mu": 1.9, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_2p0", "mu": 2.0, "role": "IDENTITY", "notes": "Fig.4 identity end"},
+    {"id": "MU_2p25", "mu": 2.25, "role": "FINITE_INTERVAL_EXTRA", "notes": "above identity"},
+    {"id": "MU_2p5", "mu": 2.5, "role": "FINITE_INTERVAL_EXTRA", "notes": "high mu extra"},
+    {"id": "MU_3p0", "mu": 3.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "high mu extra"},
+    {"id": "MU_4p0", "mu": 4.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "high mu extra"},
+    {"id": "MU_5p0", "mu": 5.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "high mu extra"}
+  ]
+}

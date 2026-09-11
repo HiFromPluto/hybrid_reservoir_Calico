@@ -1,0 +1,24 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "arms": [
+    {
+      "id": "D05_H165_CLOSED",
+      "d": 0.5,
+      "height_um": 1.65,
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "role": "claim",
+      "notes": "Danino Fig. 4b d=0.5, SI bulk height 1.65 um, closed, no bath, no AC."
+    },
+    {
+      "id": "D005_H10_REPLAY",
+      "d": 0.05,
+      "height_um": 10.0,
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "role": "replay",
+      "notes": "T1c-class control. Expect DEAD. If ALIVE, the port broke."
+    }
+  ]
+}

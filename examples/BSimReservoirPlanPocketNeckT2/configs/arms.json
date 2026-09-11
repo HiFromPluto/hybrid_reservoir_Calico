@@ -1,0 +1,58 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "arms": [
+    {
+      "id": "W100_FLUSH",
+      "kind": "flush",
+      "W_um": 100.0,
+      "L_n_um": 0.0,
+      "neck": false,
+      "boundary": "BUS_COUPLED",
+      "bus": true,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 3.0,
+      "flow_axis": "+x_bus",
+      "notes": "T0 OPEN_BUS_3 replay. Full +y face, no neck. Must DEAD, mean_R within ~10% of 0.0318."
+    },
+    {
+      "id": "W50_L20",
+      "kind": "neck",
+      "W_um": 50.0,
+      "L_n_um": 20.0,
+      "neck": true,
+      "boundary": "BUS_COUPLED",
+      "bus": true,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 3.0,
+      "flow_axis": "+x_bus",
+      "notes": "Modest constriction. FLOW=0 in neck. Do not steal volume from the pocket."
+    },
+    {
+      "id": "W20_L20",
+      "kind": "neck",
+      "W_um": 20.0,
+      "L_n_um": 20.0,
+      "neck": true,
+      "boundary": "BUS_COUPLED",
+      "bus": true,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 3.0,
+      "flow_axis": "+x_bus",
+      "notes": "Literature constriction class. FLOW=0 in neck."
+    },
+    {
+      "id": "W10_L20",
+      "kind": "neck",
+      "W_um": 10.0,
+      "L_n_um": 20.0,
+      "neck": true,
+      "boundary": "BUS_COUPLED",
+      "bus": true,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 3.0,
+      "flow_axis": "+x_bus",
+      "notes": "Aggressive neck. W=10 um is 2 voxels at dx=5. Do not change W to 15 um."
+    }
+  ]
+}

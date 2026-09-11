@@ -1,0 +1,43 @@
+# Independent graded acid-source input per 300 s window.
+# Each of 0,.25,.5,.75,1 occurs eight times; generator seed 20260815 permutation 1.
+# Not a Stage 3B AHL holdout sequence.
+0.25
+0.75
+0.50
+0.50
+0.25
+0.50
+0.25
+0.00
+0.75
+0.00
+0.50
+0.25
+1.00
+0.00
+1.00
+1.00
+1.00
+0.00
+1.00
+0.75
+1.00
+0.25
+0.25
+0.50
+0.00
+0.75
+0.50
+1.00
+0.75
+0.50
+0.75
+0.00
+0.75
+0.00
+0.75
+1.00
+0.25
+0.00
+0.25
+0.50

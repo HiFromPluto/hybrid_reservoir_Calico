@@ -1,0 +1,31 @@
+{
+  "source": "Danino 2010 SI Modeling, 41586_2010_BFnature08753_MOESM346_ESM.pdf pages 5-6. Copied TAKEN table from D0. Not DANINO_SI_MODEL.md.",
+  "time": "SI-scaled; do not convert with D1g TIME_ADJ=60",
+  "production_form": "si_hill",
+  "C_A": 1.0,
+  "C_I": 4.0,
+  "delta": 0.001,
+  "alpha": 2500.0,
+  "tau": 10.0,
+  "k": 1.0,
+  "k1": 0.1,
+  "b": 0.06,
+  "gamma_A": 15.0,
+  "gamma_I": 24.0,
+  "gamma_H": 0.01,
+  "f": 0.3,
+  "g": 0.01,
+  "d0": 0.88,
+  "D_membrane": 2.5,
+  "d": 0.5,
+  "D1_bulk": 0.0,
+  "integrator": {
+    "method": "scipy_method_of_steps_BDF",
+    "rtol": 1e-8,
+    "atol": 1e-10,
+    "max_step": 0.05,
+    "tight_rtol": 5e-9,
+    "tight_atol": 5e-11,
+    "period_rel_tol": 0.02
+  }
+}

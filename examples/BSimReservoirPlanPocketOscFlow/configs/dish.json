@@ -1,0 +1,23 @@
+{
+  "name": "PocketOsc-Flow",
+  "footprint_um": [100.0, 100.0],
+  "height_um": 1.65,
+  "d": 0.5,
+  "cell_vol_um3": 1.0,
+  "cell_vol_class": "ENGINEERING",
+  "D_um2_s": 159.0,
+  "k_danino_s": 4.6e-5,
+  "k_danino_note": "2.76e-3 / 60 from D1g; not the flow knob",
+  "molecules_per_um3_per_uM": 602.2,
+  "QS_KMLA": 0.01,
+  "bus_leak": "ENGINEERING two-resistance mu_bus(v)= (A_open/V_ext) * v*D / (v*L_y + D)",
+  "bus_leak_si_mu_of_v": false,
+  "do_not_retune": true,
+  "no_bath": true,
+  "no_ac": true,
+  "t_end_s": 43200.0,
+  "t_discard_s": 10800.0,
+  "occupancy_window_s": 7200.0,
+  "peak_min_spacing_s": 600.0,
+  "peak_prominence_uM": 1e-4
+}

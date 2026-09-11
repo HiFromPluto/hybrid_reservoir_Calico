@@ -37,6 +37,8 @@ public class BSim {
 	private BSimTicker ticker;
 	private BSimDrawer drawer;
 	private Vector<BSimExporter> exporters = new Vector<BSimExporter>();	
+	private BSimRandom random = new BSimRandom();
+	private boolean randomInjected;
 
 	/** Set the timestep (secs). */
 	public void setDt(double d) { dt = d; }
@@ -62,18 +64,28 @@ public class BSim {
 	public void setDrawer(BSimDrawer bSimDrawer) { drawer = bSimDrawer;	}
 	/** Add an exporter to be called during simulation. */
 	public void addExporter(BSimExporter e) { exporters.add(e); }	
+	/** Inject the single random source used by new deterministic simulation code. */
+	public void setRandom(BSimRandom random) {
+		if (random == null) throw new IllegalArgumentException("random source is required");
+		this.random = random;
+		this.randomInjected = true;
+	}
+	/** Convenience method for injecting a seeded random source. */
+	public void setRandomSeed(long seed) { setRandom(new BSimRandom(seed)); }
 	
 	/** Return the timestep. */
 	public double getDt() { return dt; }
 	/** Return the length of the simulation. */
 	public double getSimulationTime(){ return simulationTime; }
 	/** Return the current timestep of the simulation. */
-	public double getTimestep() { return timestep; }
+	public double getTimestep() {
+		return Double.isNaN(schedulerTimestep) ? timestep : schedulerTimestep;
+	}
 	/** Return the current time of the simulation. */
-	public double getTime() { return timestep*dt; }
+	public double getTime() { return getTimestep()*dt; }
 	/** Return a formatted version of the current time of the simulation. */
-	public String getFormattedTime() { return timeFormat.format(timestep*dt); }
-	public String getFormattedTimeHours() { return timeFormat.format(timestep*dt/3600.0); }
+	public String getFormattedTime() { return timeFormat.format(getTime()); }
+	public String getFormattedTimeHours() { return timeFormat.format(getTime()/3600.0); }
 
 	/** Return the simulation bounds (microns). */
 	public Vector3d getBound() { return bound; }
@@ -87,8 +99,21 @@ public class BSim {
 	public double getVisc() { return visc; }
 	/** Return the temperature of the environment. */
 	public double getTemperature() { return temperature; }
+	/** Return this simulation's random source. */
+	public BSimRandom getRandom() { return random; }
+	/** True when a caller explicitly supplied the random source or seed. */
+	public boolean hasInjectedRandom() { return randomInjected; }
 	
 	private int timestep;
+	private double schedulerTimestep = Double.NaN;
+
+	void setSchedulerTimestep(double schedulerTimestep) {
+		this.schedulerTimestep = schedulerTimestep;
+	}
+
+	void clearSchedulerTimestep() {
+		schedulerTimestep = Double.NaN;
+	}
 
 	/**
 	 * Runs the simulation in a frame until the frame is closed, ignoring exporters. 
@@ -108,6 +133,7 @@ public class BSim {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		clearSchedulerTimestep();
 		timestep = 0;
 		while(true) {
 			ticker.tick();	
@@ -122,6 +148,7 @@ public class BSim {
 	 * Runs and exports the simulation.
 	 */
 	public void export() {						
+		clearSchedulerTimestep();
 		for(BSimExporter exporter : exporters) exporter.before();		
 
 		// Increment integer timesteps than adding to double time to avoid rouding issues

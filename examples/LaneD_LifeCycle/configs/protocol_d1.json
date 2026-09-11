@@ -1,0 +1,76 @@
+{
+  "frozen_before_traces": true,
+  "status_label": "D1_MEASURED_DECLINE",
+  "object": "LANE_D_LIFE_CYCLE",
+  "device": "LANE_D_CLOSED_BATH",
+  "not_device": "LC0_OPEN_BATH",
+  "parent_extra": "D0_CLOSED_BATH",
+  "phase": 1,
+  "report_not_gate": true,
+  "narma": false,
+  "charc": false,
+  "ipc": false,
+  "death": false,
+  "motility": false,
+  "chemistry": false,
+  "pde": false,
+  "erickson": false,
+  "famine": false,
+  "handoff": false,
+  "new_java": false,
+  "new_trace": false,
+  "trace": "examples/LaneD_LifeCycle/results/d0_grow.csv",
+  "k_s_mM": 0.02,
+  "lambda_s_per_h": 1.0,
+  "c_cut_mM": 0.001,
+  "erickson_k_m_uM": null,
+  "erickson_lambda_c_per_h": null,
+  "integral": "trapezoid_logged_rows",
+  "resample_1s": false,
+  "lambda_column": "lambda_per_h",
+  "dt_to_hours": true,
+  "primary": "D_lambda = (1/ln2) * int_W lambda dt",
+  "d0_fingerprint": {
+    "t_end_s": 10455.0,
+    "c_end_mM": 0.0009977,
+    "n_end": 64
+  },
+  "windows": [
+    {
+      "id": "W_19K",
+      "start": "C < 19*K_S",
+      "c_start_mM": 0.38,
+      "section_32": "lam<0.95",
+      "budget_estimate": 0.816
+    },
+    {
+      "id": "W_9K",
+      "start": "C < 9*K_S",
+      "c_start_mM": 0.18,
+      "section_32": "lam<0.90",
+      "budget_estimate": 0.444
+    },
+    {
+      "id": "W_3K",
+      "start": "C < 3*K_S",
+      "c_start_mM": 0.06,
+      "section_32": "lam<0.75",
+      "budget_estimate": 0.163
+    },
+    {
+      "id": "W_K",
+      "start": "C < K_S",
+      "c_start_mM": 0.02,
+      "section_32": "lam<0.50",
+      "budget_estimate": 0.057
+    },
+    {
+      "id": "W_POST3",
+      "start": "first N==64",
+      "c_start_mM": null,
+      "section_32": "after last fission; D0 structure, not a threshold",
+      "budget_estimate": null,
+      "not_a_depressed_definition": true
+    }
+  ]
+}

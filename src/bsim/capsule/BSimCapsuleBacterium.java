@@ -79,7 +79,7 @@ public class BSimCapsuleBacterium {
         Vector3d u = new Vector3d(); u.sub(this.x2, this.x1);
 
         // Uniform Distn; Change to Normal?
-        double divPert = 0.1*L_max*(rng.nextDouble() - 0.5);
+        double divPert = 0.1*L_max*(nextDouble() - 0.5);
 
         double L_actual = u.length();
 
@@ -89,15 +89,15 @@ public class BSimCapsuleBacterium {
         /// TODO::: Check that these are computed correctly...!
         Vector3d x2_new = new Vector3d();
         x2_new.scaleAdd(L1/L_actual, u, this.x1);
-        x2_new.add(new Vector3d(0.05*L_initial*(rng.nextDouble() - 0.5),
-                                0.05*L_initial*(rng.nextDouble() - 0.5),
-                                0.05*L_initial*(rng.nextDouble() - 0.5)));
+        x2_new.add(new Vector3d(0.05*L_initial*(nextDouble() - 0.5),
+                                0.05*L_initial*(nextDouble() - 0.5),
+                                0.05*L_initial*(nextDouble() - 0.5)));
 
         Vector3d x1_child = new Vector3d();
         x1_child.scaleAdd(-(L2/L_actual), u, this.x2);
-        x1_child.add(new Vector3d(0.05*L_initial*(rng.nextDouble() - 0.5),
-                                  0.05*L_initial*(rng.nextDouble() - 0.5),
-                                  0.05*L_initial*(rng.nextDouble() - 0.5)));
+        x1_child.add(new Vector3d(0.05*L_initial*(nextDouble() - 0.5),
+                                  0.05*L_initial*(nextDouble() - 0.5),
+                                  0.05*L_initial*(nextDouble() - 0.5)));
 
         /*
         This is dangerous.
@@ -514,9 +514,17 @@ public class BSimCapsuleBacterium {
      * you should call setBrownianForceMagnitude() again
      */
     public void brownianForce() {
-        Vector3d f = new Vector3d(rng.nextGaussian(), rng.nextGaussian(), rng.nextGaussian());
+        Vector3d f = new Vector3d(nextGaussian(), nextGaussian(), nextGaussian());
         f.scale(brownianForceMagnitude);
         x1force.add(f);
         x2force.add(f);
+    }
+
+    private double nextDouble() {
+        return sim.hasInjectedRandom() ? sim.getRandom().nextDouble() : rng.nextDouble();
+    }
+
+    private double nextGaussian() {
+        return sim.hasInjectedRandom() ? sim.getRandom().nextGaussian() : rng.nextGaussian();
     }
 }

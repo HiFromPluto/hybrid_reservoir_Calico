@@ -1,0 +1,14 @@
+{
+  "frozen_before_traces": true,
+  "status_label": "D3_2_CUTOFF_CONVERGENCE",
+  "device": "D3_1_FCR_STANDALONE",
+  "death": false,
+  "dish": false,
+  "fit": false,
+  "lambda_i_per_h": 0.90,
+  "t_h": 10.0,
+  "dt_h": 1.0e-4,
+  "lambda_cut_per_h": [0.10, 0.05, 0.02, 0.01, 0.005, 0.001, 0.0001],
+  "delta_cv": 0.05,
+  "d4": false
+}

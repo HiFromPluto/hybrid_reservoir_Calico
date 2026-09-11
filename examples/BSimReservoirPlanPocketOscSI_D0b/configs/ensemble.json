@@ -1,0 +1,66 @@
+{
+  "label": "PREDECLARED_AHL_KICK",
+  "frozen_before_traces": true,
+  "primary_id": "AHL_KICK_005",
+  "si_ic_quote": "A small AHL perturbation in the middle of the array initiates waves of LuxI concentration (Fig. 4c). Bulk Hi, He, and Hi(t<0) are not stated in the SI. D0 primary SI_BASAL_PERTURB is the wrong bulk kick because P depends on delayed Hi.",
+  "kick_choice_frozen_from": "D0_FAIL_DIAGNOSIS.md: Hi=He=0.05 at mu=0.4 was OSC period 63.6; Hi=0.01 at mu=0.4 was NO_PERIOD. Chosen before the D0b grid, not after.",
+  "control_mu": [0.4],
+  "failed_prior_replay_mu": 1.5,
+  "arms": [
+    {
+      "id": "AHL_KICK_005",
+      "role": "PRIMARY",
+      "A": 0.0,
+      "I": 0.0,
+      "H_i": 0.05,
+      "H_e": 0.05,
+      "H_i_history": 0.05,
+      "history_equals_state": true,
+      "notes": "PRIMARY. Main-text small AHL perturbation; 0.05 occupied in diagnosis at mu=0.4; 0.01 did not."
+    },
+    {
+      "id": "SI_BASAL_PERTURB",
+      "role": "FAILED_D0_PRIMARY",
+      "A": 0.0,
+      "I": 1.0,
+      "H_i": 0.0,
+      "H_e": 0.0,
+      "H_i_history": 0.0,
+      "history_equals_state": true,
+      "notes": "Failed D0 primary. Protein-only I=1, basal AHL. Expect NO_PERIOD at identity mu=0.40."
+    },
+    {
+      "id": "AHL_KICK_001",
+      "role": "SUBTHRESHOLD_KICK",
+      "A": 0.0,
+      "I": 0.0,
+      "H_i": 0.01,
+      "H_e": 0.01,
+      "H_i_history": 0.01,
+      "history_equals_state": true,
+      "notes": "Subthreshold AHL kick from diagnosis. Not the identity arm."
+    },
+    {
+      "id": "FAILED_PRIOR_IVP",
+      "role": "FAILED_PRIOR_IVP",
+      "A": 0.0,
+      "I": 0.0,
+      "H_i": 1.0,
+      "H_e": 1.0,
+      "H_i_history": 1.0,
+      "history_equals_state": true,
+      "notes": "PocketOsc-SI ENGINEERING start. Negative control only."
+    },
+    {
+      "id": "AHL_KICK_020",
+      "role": "BASIN_CHECK",
+      "A": 0.0,
+      "I": 0.0,
+      "H_i": 0.2,
+      "H_e": 0.2,
+      "H_i_history": 0.2,
+      "history_equals_state": true,
+      "notes": "OPTIONAL basin-check. Not the identity arm. Do not promote after traces."
+    }
+  ]
+}

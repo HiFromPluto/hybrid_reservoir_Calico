@@ -1,0 +1,5 @@
+# Frozen WaveformS (class, phase) schedule. phase identically 0.
+# class_seed=20260818 (vector frozen; do not reshuffle)
+# class: 0=sine 1=square 2=triangle
+class=2,0,1,1,2,0,0,1,0,2,0,1,0,1,1,2,0,2,2,0,2,2,1,1,0
+phase=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

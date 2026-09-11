@@ -1,0 +1,15 @@
+{
+  "mu": 1.5,
+  "d": 0.5,
+  "production_form": "si_hill",
+  "flag": "NO_PERIOD",
+  "period": null,
+  "n_peaks": 0,
+  "y0": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+  ],
+  "H_i_history": 1.0
+}

@@ -1,0 +1,42 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "arms": [
+    {
+      "id": "CLOSED_NOFLUX",
+      "boundary": "NO_FLUX",
+      "bus": false,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 0.0,
+      "flow_axis": "none",
+      "notes": "Four no-flux walls. Occupancy sanity at u=0.5."
+    },
+    {
+      "id": "OPEN_ABSORBING",
+      "boundary": "ABSORBING_OPEN_Y",
+      "bus": false,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 0.0,
+      "flow_axis": "none",
+      "notes": "Dirichlet C=0 on pocket +y. Harsh leak diagnostic."
+    },
+    {
+      "id": "OPEN_BUS_3",
+      "boundary": "BUS_COUPLED",
+      "bus": true,
+      "pocket_flow_um_s": 0.0,
+      "bus_flow_um_s": 3.0,
+      "flow_axis": "+x_bus",
+      "notes": "Backbone geometry. Bus past the open edge, inlet C=0."
+    },
+    {
+      "id": "THROUGH_8",
+      "boundary": "OUTFLOW_Y",
+      "bus": false,
+      "pocket_flow_um_s": 8.0,
+      "bus_flow_um_s": 0.0,
+      "flow_axis": "+y_pocket",
+      "notes": "Negative control. Through-pocket 8 um/s. Expected DEAD."
+    }
+  ]
+}

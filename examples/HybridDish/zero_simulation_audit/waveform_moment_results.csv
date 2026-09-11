@@ -1,0 +1,12 @@
+template_set,class,mean,variance,population_sd,power_mean_u2,min,max,range,record_type,baseline,n_features,n_train_blocks,n_validation_blocks,n_test_blocks,lambda,macro_ovr_auc,accuracy,sine_auc,square_auc,triangle_auc,confusion
+frozen_5_point,sine,0.25,0.03125,0.1767766953,0.09375,0.01223587093,0.4877641291,0.4755282581,,,,,,,,,,,,,
+frozen_5_point,square,0.29,0.0384,0.1959591794,0.1225,0.05,0.45,0.4,,,,,,,,,,,,,
+frozen_5_point,triangle,0.21,0.0224,0.1496662955,0.0665,0.05,0.45,0.4,,,,,,,,,,,,,
+proposed_8_point,sine,0.25,0.03125,0.1767766953,0.09375,0,0.5,0.5,,,,,,,,,,,,,
+proposed_8_point,square,0.25,0.0625,0.25,0.125,0,0.5,0.5,,,,,,,,,,,,,
+proposed_8_point,triangle,0.25,0.0234375,0.1530931089,0.0859375,0,0.5,0.5,,,,,,,,,,,,,
+frozen_5_point,,,,,,,,,block_baseline,MEAN_ONLY,1,22,5,10,1000000,0.8333333333,0.3,0.5,1,1,"[[3,0,0],[3,0,0],[4,0,0]]"
+frozen_5_point,,,,,,,,,block_baseline,POWER_ONLY,1,22,5,10,1000000,0.8095238095,0.3,0.4285714286,1,1,"[[3,0,0],[3,0,0],[4,0,0]]"
+frozen_5_point,,,,,,,,,block_baseline,VARIANCE_ONLY,1,22,5,10,1000000,0.8571428571,0.3,0.5714285714,1,1,"[[3,0,0],[3,0,0],[4,0,0]]"
+frozen_5_point,,,,,,,,,block_baseline,MOMENTS,6,22,5,10,1000000,1,0.3,1,1,1,"[[3,0,0],[3,0,0],[4,0,0]]"
+frozen_5_point,,,,,,,,,block_baseline,RAW_TEMPLATE_5,5,22,5,10,1000000,1,0.3,1,1,1,"[[3,0,0],[3,0,0],[4,0,0]]"

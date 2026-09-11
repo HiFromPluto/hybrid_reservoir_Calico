@@ -1,0 +1,34 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "arms": [
+    {
+      "id": "EMPTY_POINT",
+      "kind": "point_hybriddish",
+      "k": "hybriddish",
+      "D_pocket_factor": 1.0,
+      "u": 0.5,
+      "t_s": 9000.0,
+      "notes": "T0 OPEN_BUS_3 replay. Expected DEAD."
+    },
+    {
+      "id": "PACKED_PLUG",
+      "kind": "point_hybriddish",
+      "k": "hybriddish",
+      "D_pocket_factor": 0.25,
+      "u": 0.5,
+      "t_s": 9000.0,
+      "notes": "HYPOTHETICAL D_eff=D/4 in pocket. Do not fit after occupancy."
+    },
+    {
+      "id": "VOLUMETRIC_LUXI",
+      "kind": "meanfield_danino",
+      "k": "danino",
+      "D_pocket_factor": 1.0,
+      "u": 0.0,
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "notes": "D1g QS_* write the field. Optical H(LA) vs QS_KMLA."
+    }
+  ]
+}

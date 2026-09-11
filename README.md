@@ -1,3 +1,13 @@
+# Hybrid reservoir (this repository)
+
+Private research fork of [BSim](https://github.com/CellSimulationLabs/bsim): an *E. coli* monolayer used as a one-way chemical reservoir.
+
+**Read first:** [PROJECT_REPORT.md](PROJECT_REPORT.md) — what the dish does, and the NARMA-10 task.
+
+The original BSim notes follow.
+
+---
+
 # [BSim](https://cellsimulationlabs.github.io/tools/bsim/)
 
 BSim is an agent-based modelling tool designed to allow for the study of bacterial populations. 

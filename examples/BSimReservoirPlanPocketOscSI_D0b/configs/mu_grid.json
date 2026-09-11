@@ -1,0 +1,36 @@
+{
+  "predeclared": true,
+  "frozen_before_traces": true,
+  "do_not_add_after_occupancy": true,
+  "d": 0.5,
+  "D1": 0.0,
+  "identity_ids": [
+    "MU_0p32", "MU_0p36", "MU_0p40", "MU_0p44",
+    "MU_0p48", "MU_0p52", "MU_0p56", "MU_0p60"
+  ],
+  "extra_ids": [
+    "MU_0", "MU_0p10", "MU_0p20", "MU_0p28",
+    "MU_0p80", "MU_1p00", "MU_1p20", "MU_1p50", "MU_2p00"
+  ],
+  "identity_justification": "Inside the diagnosis OSC window near mu=0.3-0.8, not the failed D0 identity line mu=1-2 which sits in the OFF well.",
+  "extras_justification": "Edges of the diagnosis window plus the failed D0 mu=1-2 line, reported as outside the identity score.",
+  "arms": [
+    {"id": "MU_0", "mu": 0.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "closed analog; report only"},
+    {"id": "MU_0p10", "mu": 0.1, "role": "FINITE_INTERVAL_EXTRA", "notes": "below diagnosis OSC window"},
+    {"id": "MU_0p20", "mu": 0.2, "role": "FINITE_INTERVAL_EXTRA", "notes": "below diagnosis OSC window"},
+    {"id": "MU_0p28", "mu": 0.28, "role": "FINITE_INTERVAL_EXTRA", "notes": "diagnosis edge; MODERATE_AHL was damped ringing"},
+    {"id": "MU_0p32", "mu": 0.32, "role": "IDENTITY", "notes": "identity start"},
+    {"id": "MU_0p36", "mu": 0.36, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_0p40", "mu": 0.4, "role": "IDENTITY", "notes": "tightness and wrong-kick mu"},
+    {"id": "MU_0p44", "mu": 0.44, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_0p48", "mu": 0.48, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_0p52", "mu": 0.52, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_0p56", "mu": 0.56, "role": "IDENTITY", "notes": ""},
+    {"id": "MU_0p60", "mu": 0.6, "role": "IDENTITY", "notes": "identity end"},
+    {"id": "MU_0p80", "mu": 0.8, "role": "FINITE_INTERVAL_EXTRA", "notes": "diagnosis OSC but not identity"},
+    {"id": "MU_1p00", "mu": 1.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "failed D0 identity start; expected collapsed"},
+    {"id": "MU_1p20", "mu": 1.2, "role": "FINITE_INTERVAL_EXTRA", "notes": "mu>=1.2 expected NO_PERIOD/OFF; tightness extra"},
+    {"id": "MU_1p50", "mu": 1.5, "role": "FINITE_INTERVAL_EXTRA", "notes": "failed D0 fixture mu"},
+    {"id": "MU_2p00", "mu": 2.0, "role": "FINITE_INTERVAL_EXTRA", "notes": "failed D0 identity end"}
+  ]
+}

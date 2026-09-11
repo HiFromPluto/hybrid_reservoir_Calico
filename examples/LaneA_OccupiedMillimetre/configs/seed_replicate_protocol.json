@@ -1,0 +1,30 @@
+{
+  "gate": "LaneA_SEED_REPLICATE",
+  "status_label": "LANE_A_SEED_REPLICATE",
+  "frozen_before_traces": true,
+  "frozen_date": "2026-08-29",
+  "seeds": [101, 202, 303],
+  "no_extra_seeds": true,
+  "J_max": 128000000.0,
+  "warmup_18000_identity": false,
+  "motility": false,
+  "parent_rewrite": false,
+  "narma10b_rewrite": false,
+  "waveform2c_auc_copy": false,
+  "waveform_java_windows": 400,
+  "waveform_primary": "block_brier",
+  "waveform_brier_delta": 0.02,
+  "waveform_auc_not_axis": true,
+  "nrmse_delta": 0.02,
+  "axis": {
+    "carrier": "field",
+    "mg": "field",
+    "narma10": "living",
+    "lorenz": "living",
+    "waveform": "living"
+  },
+  "axis_holds_min_sign_match": 4,
+  "axis_holds_mean_nrmse_margin": 0.02,
+  "driven_only_for_202_303": true,
+  "silent_reuse_seed_101": true
+}

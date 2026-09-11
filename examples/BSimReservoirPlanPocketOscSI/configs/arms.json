@@ -1,0 +1,55 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "cover_ids": ["MU_0", "MU_025", "MU_05", "MU_1", "MU_2"],
+  "arms": [
+    {
+      "id": "MU_0",
+      "d": 0.5,
+      "mu": 0.0,
+      "D1": 0.0,
+      "role": "COVER",
+      "notes": "closed analog. SI-scaled mu=0."
+    },
+    {
+      "id": "MU_025",
+      "d": 0.5,
+      "mu": 0.25,
+      "D1": 0.0,
+      "role": "COVER",
+      "notes": "low flow. covering slice of Fig. 4c."
+    },
+    {
+      "id": "MU_05",
+      "d": 0.5,
+      "mu": 0.5,
+      "D1": 0.0,
+      "role": "COVER",
+      "notes": "mid flow."
+    },
+    {
+      "id": "MU_1",
+      "d": 0.5,
+      "mu": 1.0,
+      "D1": 0.0,
+      "role": "COVER",
+      "notes": "higher flow."
+    },
+    {
+      "id": "MU_2",
+      "d": 0.5,
+      "mu": 2.0,
+      "D1": 0.0,
+      "role": "COVER",
+      "notes": "high flow."
+    },
+    {
+      "id": "MU_CSTR_MIN",
+      "d": 0.5,
+      "mu": 1.25,
+      "D1": 0.0,
+      "role": "ENGINEERING",
+      "notes": "Job 3 0.0208 s^-1 expressed as min^-1. Not identity. Do not retune from this."
+    }
+  ]
+}

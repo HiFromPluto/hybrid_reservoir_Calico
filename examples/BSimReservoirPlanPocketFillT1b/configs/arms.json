@@ -1,0 +1,38 @@
+{
+  "predeclared": true,
+  "do_not_add_after_occupancy": true,
+  "BATH_UM": 0.05,
+  "arms": [
+    {
+      "id": "VOLUMETRIC_ZERO",
+      "kind": "meanfield_danino",
+      "seed": "none",
+      "cells_write": true,
+      "ac_point": false,
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "notes": "T1 replay. C(0)=0. Expected DEAD. If ALIVE, the port broke."
+    },
+    {
+      "id": "SEED_PULSE",
+      "kind": "meanfield_danino",
+      "seed": "pulse_pocket",
+      "cells_write": true,
+      "ac_point": false,
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "notes": "Primary QS-cure. Pocket voxels C(0)=0.05 uM, bus 0, then free leak. ODE ICs stay {0,0,0,0}."
+    },
+    {
+      "id": "SEED_BATH",
+      "kind": "meanfield_danino",
+      "seed": "bath",
+      "cells_write": true,
+      "ac_point": false,
+      "t_s": 14400.0,
+      "occupancy_window_s": 7200.0,
+      "class": "ENGINEERING",
+      "notes": "Diagnostic D1g-class. Pocket extracellular held at 0.05 uM. Not the claim if pulse is DEAD."
+    }
+  ]
+}

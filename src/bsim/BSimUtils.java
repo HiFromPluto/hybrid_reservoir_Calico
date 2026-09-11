@@ -32,6 +32,11 @@ public class BSimUtils {
 		return scaledVariable;
 			
 		}
+
+	public static double sampleNormal(double mean, double stdev, BSimRandom source) {
+		if (source == null) throw new IllegalArgumentException("random source is required");
+		return stdev * source.nextGaussian() + mean;
+	}
 	
 	/** Shared random number generator. */
 	private static Random rng = new Random();
@@ -80,6 +85,41 @@ public class BSimUtils {
 			return (x * theta);
 		}
 	}
+
+	public static synchronized double sampleGamma(double k, double theta,
+			BSimRandom source) {
+		if (source == null) throw new IllegalArgumentException("random source is required");
+		boolean accept = false;
+		if (k < 1) {
+			double c = 1 / k;
+			double d = (1 - k) * Math.pow(k, k / (1 - k));
+			double z = 0, x = 0;
+			do {
+				double u = source.nextDouble();
+				double v = source.nextDouble();
+				z = -Math.log(u);
+				double e = -Math.log(v);
+				x = Math.pow(z, c);
+				if (z + e >= d + x) accept = true;
+			} while (!accept);
+			return x * theta;
+		}
+		double b = k - Math.log(4);
+		double c = k + Math.sqrt(2 * k - 1);
+		double lam = Math.sqrt(2 * k - 1);
+		double cheng = 1 + Math.log(4.5);
+		double x = 0;
+		do {
+			double u = source.nextDouble();
+			double v = source.nextDouble();
+			double y = (1 / lam) * Math.log(v / (1 - v));
+			x = k * Math.exp(y);
+			double z = u * v * v;
+			double r = b + c * y - x;
+			if (r >= 4.5 * z - cheng || r >= Math.log(z)) accept = true;
+		} while (!accept);
+		return x * theta;
+	}
 	
 	/**
 	 * Rotates the vector v by an angle theta in a random direction perpendicular to v.
@@ -91,6 +131,17 @@ public class BSimUtils {
 		randomPerp.cross(v, random);		
 		rotate(v, randomPerp, theta);
 		// Ensure the vector is unit
+		v.normalize();
+	}
+
+	public static synchronized void rotatePerp(Vector3d v, double theta,
+			BSimRandom source) {
+		if (source == null) throw new IllegalArgumentException("random source is required");
+		Vector3d random = new Vector3d(0.5-source.nextDouble(),
+				0.5-source.nextDouble(), 0.5-source.nextDouble());
+		Vector3d randomPerp = new Vector3d();
+		randomPerp.cross(v, random);
+		rotate(v, randomPerp, theta);
 		v.normalize();
 	}
 	

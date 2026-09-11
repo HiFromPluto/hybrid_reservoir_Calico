@@ -71,7 +71,14 @@ public class BSimParticle {
 	 * you should call setBrownianForceMagnitude() again
 	 */
 	public void brownianForce() {						
-		Vector3d f = new Vector3d(rng.nextGaussian(), rng.nextGaussian(), rng.nextGaussian());
+		Vector3d f;
+		if (sim.hasInjectedRandom()) {
+			f = new Vector3d(sim.getRandom().nextGaussian(),
+					sim.getRandom().nextGaussian(), sim.getRandom().nextGaussian());
+		} else {
+			/* Preserve the legacy static source and example seeding hooks. */
+			f = new Vector3d(rng.nextGaussian(), rng.nextGaussian(), rng.nextGaussian());
+		}
 		f.scale(brownianForceMagnitude); 
 		addForce(f);
 	}

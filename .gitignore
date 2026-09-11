@@ -2,14 +2,24 @@
 .DS_Store
 .idea
 docs
+.claude
 
 libbsim
 out
 release
 results
+**/logs/
+**/__pycache__/
 
 .fatjar
 *.avi
 *.m4v
 *.iml
 *.class
+*.pyc
+*.log
+*.err
+*.aux
+*.bbl
+*.blg
+*.jar

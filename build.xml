@@ -5,11 +5,14 @@
 	<!-- Set up some global properties -->
 	<property name="src" location="src"/>
 	<property name="lib" location="lib"/>
-	<property name="coreLibs"  location="${lib}/core.jar;${lib}/vecmath.jar;${lib}/objimport.jar"/>
+	<property name="coreLibs"
+		location="${lib}/core.jar;${lib}/vecmath.jar;${lib}/objimport.jar;${lib}/bsim-osp.jar;${lib}/jcommander-1.49-SNAPSHOT.jar"/>
 	<property name="latestLib"  location="${lib}/bsimSVN.jar"/>
 	<property name="examples" location="examples"/>
+	<property name="test" location="test"/>
 	<property name="dist"  location="dist"/>
 	<property name="build" location="${dist}/build"/>
+	<property name="n0TestBuild" location="${dist}/n0-test-build"/>
 
 	<!-- Build and run an example file 
 	Bit of a test at the moment, most likely it will be better to farm this out 
@@ -57,28 +60,375 @@
 	<target name="compile" depends="init"
 		description="compile the source " >
 		<!-- Compile the java code from ${src} into ${build} -->
-		<javac classpath="${coreLibs}"
+		<javac classpath="${coreLibs}" includeantruntime="false" encoding="UTF-8"
 			srcdir="${src}" destdir="${build}">
 			<include name="bsim/**"/>
 			<exclude name="bsim/geometry/tests/**"/>
 		</javac>
 	</target>
 
+	<target name="cleanN0Tests"
+		description="remove stale Gate N0 test classes">
+		<delete dir="${n0TestBuild}"/>
+	</target>
+
+	<target name="compileN0Tests" depends="compile,cleanN0Tests"
+		description="compile the executable Gate N0 regression harness">
+		<mkdir dir="${n0TestBuild}"/>
+		<javac classpath="${coreLibs};${build}" includeantruntime="false" encoding="UTF-8"
+			srcdir="${test}" destdir="${n0TestBuild}">
+			<include name="bsim/n0/**"/>
+		</javac>
+	</target>
+
+	<target name="n0-test" depends="compileN0Tests"
+		description="run deterministic Gate N0 numerical regressions">
+		<java classpath="${coreLibs};${build};${n0TestBuild}"
+			classname="bsim.n0.N0NumericalRegression"
+			fork="true" failonerror="true"/>
+	</target>
+
+	<target name="d1-parity" depends="compile"
+		description="Gate D1 Java vs D0b Object B fixtures. NOT_FIG4B. Not Fig. 4b.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.d1.DaninoSID1Parity"
+			dir="${basedir}"
+			fork="true" failonerror="true"/>
+	</target>
+
+	<property name="p0Build" location="${dist}/p0-build"/>
+	<property name="p0.args" value=""/>
+
+	<target name="compileP0" depends="compile"
+		description="compile Gate P0 job and Scratch chassis imports">
+		<mkdir dir="${p0Build}"/>
+		<javac classpath="${coreLibs};${build}" includeantruntime="false" encoding="UTF-8"
+			srcdir="${examples}" destdir="${p0Build}"
+			includes="BacteriumFromScratch/ChassisParameters.java,BacteriumFromScratch/EcoliRodCell.java,BacteriumFromScratch/ValdezHertzian.java"/>
+		<javac classpath="${coreLibs};${build};${p0Build}" includeantruntime="false" encoding="UTF-8"
+			srcdir="${examples}/BSimReservoirPlanDaninoPocketP0" destdir="${p0Build}"
+			includes="DaninoPocketP0.java"/>
+	</target>
+
+	<target name="p0-packed" depends="compileP0"
+		description="Gate P0 packed Danino-class device. Chemistry OFF. NOT_FIG4B. Not Fig. 4b.">
+		<java classpath="${coreLibs};${build};${p0Build}"
+			classname="DaninoPocketP0.DaninoPocketP0"
+			dir="${examples}/BSimReservoirPlanDaninoPocketP0"
+			fork="true" failonerror="true">
+			<arg line="${p0.args}"/>
+		</java>
+	</target>
+
+	<target name="c0-wellmixed" depends="compile"
+		description="Gate C0 well-mixed Object B coupling. NOT_FIG4B. Not Fig. 4b. Not C1.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.c0.DaninoSIC0Job"
+			dir="${basedir}"
+			fork="true" failonerror="true"/>
+	</target>
+
+	<property name="c1.args" value=""/>
+
+	<target name="c1-packed" depends="compile"
+		description="Gate C1 packed spatial Object B. NOT_FIG4B. Not Fig. 4b. Not Object A.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.c1.DaninoSIC1Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${c1.args}"/>
+		</java>
+	</target>
+
+	<property name="c1b.args" value=""/>
+
+	<target name="c1b-island" depends="compile"
+		description="Gate C1b island C0-equivalent Object B. NOT_FIG4B. C1 FAIL unchanged.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.c1b.DaninoSIC1bJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${c1b.args}"/>
+		</java>
+	</target>
+
+	<property name="c1c.args" value=""/>
+
+	<target name="c1c-filled" depends="compile"
+		description="Gate C1c filled-pocket Object B. NOT_FIG4B. C1 FAIL unchanged. Not Fig. 4b.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.c1c.DaninoSIC1cJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${c1c.args}"/>
+		</java>
+	</target>
+
+	<property name="a0.args" value=""/>
+
+	<target name="a0-ideal" depends="compile"
+		description="Gate A0 ideal AC source on C1c_FILLED_POCKET. A0_IDEAL_SOURCE. NOT_FIG4B. Not Fig. 4b. Not C1_OPEN_DILUTE.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.a0.DaninoSIA0Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${a0.args}"/>
+		</java>
+	</target>
+
+	<property name="a1.args" value=""/>
+
+	<target name="a1-bounded" depends="compile"
+		description="Gate A1 bounded transducer on C1c_FILLED_POCKET. A1_BOUNDED_TRANSDUCER. HYPOTHETICAL. NOT_FIG4B. Not calibrated. Not Fig. 4b.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.a1.DaninoSIA1Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${a1.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.args" value=""/>
+
+	<target name="lane-a-occupancy" depends="compile"
+		description="Lane A N0 occupancy on millimetre dish. LANE_A_OCCUPIED_MILLIMETRE. Not NARMA. Not C1c. Not paper 1. Not Fig. 4b.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneAN0OccupancyJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.carrier.args" value=""/>
+
+	<target name="lane-a-carrier" depends="compile"
+		description="Lane A carrier extra: reconstruct u, living-layer vs field. LANE_A_CARRIER. Not NARMA. Occupancy unchanged.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneACarrierJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.carrier.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.narma10.args" value=""/>
+
+	<target name="lane-a-narma10" depends="compile"
+		description="Lane A NARMA-10 system extra vs silent, field reported. LANE_A_NARMA10. Not Narma10b. Occupancy/carrier unchanged.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneANarma10Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.narma10.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.mg.args" value=""/>
+
+	<target name="lane-a-mg" depends="compile"
+		description="Lane A Mackey-Glass one-step vs silent, field and persist reported. LANE_A_MG. Not BenchA 0.260. Occupancy/carrier/NARMA unchanged.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneAMgJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.mg.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.lorenz.args" value=""/>
+
+	<target name="lane-a-lorenz" depends="compile"
+		description="Lane A Lorenz L3 k=10 AUTO_X vs silent, field persist AR10 reported. LANE_A_LORENZ. Not L3 0.826. Occupancy/carrier/NARMA/MG unchanged.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneALorenzJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.lorenz.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.waveform.args" value=""/>
+	<property name="lanea.krgr.args" value=""/>
+
+	<target name="lane-a-waveform" depends="compile"
+		description="Lane A Waveform2c 3-class order vs silent, field and MOMENTS. LANE_A_WAVEFORM. 400 windows. Not 0.835. U-only must PASS first.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneAWaveformJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.waveform.args}"/>
+		</java>
+	</target>
+
+	<target name="lane-a-kr-gr" depends="compile"
+		description="Lane A new i.i.d. and constant rank drives. LANE_A_KR_GR. T=840. Not a NARMA-map rewrite. No parameter sweep.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneAKrGrJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.krgr.args}"/>
+		</java>
+	</target>
+
+	<property name="lanea.fieldnull.args" value=""/>
+
+	<target name="lane-a-field-null" depends="compile"
+		description="Lane A successive-bit XOR field-null. LANE_A_FIELD_NULL_TASK. 400 windows. Not CHARC. U-only must PASS first.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanea.LaneAFieldNullJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${lanea.fieldnull.args}"/>
+		</java>
+	</target>
+
+	<property name="laneb.args" value=""/>
+
+	<target name="laneb-b0" depends="compile"
+		description="Gate B0 motility-as-memory. LANE_B_CHEMOTACTIC_SPATIAL. B0_MOTILITY_MEMORY. Not Fig. 4b. Not Lane A. Not C1c. No NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laneb.LaneBJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${laneb.args}"/>
+		</java>
+	</target>
+
+	<property name="laneb.b1.args" value=""/>
+
+	<target name="laneb-b1" depends="compile"
+		description="Gate B1 paint-hold. LANE_B_CHEMOTACTIC_SPATIAL. B1_PAINT_HOLD. Parent B0 FAIL kept. Not Fig. 4b. Not Lane A. No NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laneb.LaneB1Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${laneb.b1.args}"/>
+		</java>
+	</target>
+
+	<property name="laneb.b2.args" value=""/>
+
+	<target name="laneb-b2" depends="compile"
+		description="Gate B2 stripe occupy. LANE_B_CHEMOTACTIC_SPATIAL. B2_STRIPE_OCCUPY. Parent B0/B1 FAILs kept. Not Fig. 4b. Not Lane A. No NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laneb.LaneB2Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${laneb.b2.args}"/>
+		</java>
+	</target>
+
+	<property name="laneb.b3.args" value=""/>
+
+	<target name="laneb-b3" depends="compile"
+		description="Gate B3 sustained stripe. LANE_B_CHEMOTACTIC_SPATIAL. B3_SUSTAINED_STRIPE. Parent B0/B1/B2 FAILs kept. Not Fig. 4b. Not Lane A. No NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laneb.LaneB3Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${laneb.b3.args}"/>
+		</java>
+	</target>
+
+	<target name="laneb-chey" depends="compile"
+		description="Gate B4 CheY probe. LANE_B_CHEMOTACTIC_SPATIAL. B4_CHEY_PROBE. Not colony kappa. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laneb.LaneBCheyProbeJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="lanec-lc0" depends="compile"
+		description="Lane C LC0 replication visible. LANE_C_LIVING_CLOCKS. LC0_REPLICATION_VISIBLE. Warren sizer. No death. Not NARMA. Not P0.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanec.LaneCLc0Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="lanec-lc0-two-gen" depends="compile"
+		description="Lane C LC0 two-generation polish. LANE_C_LIVING_CLOCKS. LC0_TWO_GENERATION. Same Warren sizer. Parent LC0 PASS kept. No death. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanec.LaneCLc0TwoGenJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="lanec-lc1" depends="compile"
+		description="Lane C LC1 death visible. LANE_C_LIVING_CLOCKS. LC1_DEATH_VISIBLE. Schink WT 0.43/d. Growth off. Not Paper 1 rates. Not LC0. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanec.LaneCLc1Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="lanec-lc1b" depends="compile"
+		description="Lane C LC1b binomial death clock. LANE_C_LIVING_CLOCKS. LC1B_DEATH_BINOMIAL. Seed 303. Parent LC1 FAIL kept. Not seed 101. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.lanec.LaneCLc1bJob"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="laned-d0" depends="compile"
+		description="Lane D D0 closed bath. LANE_D_LIFE_CYCLE. D0_CLOSED_BATH. Scalar depleting C. Incremental sizer. Death off. Not LC0_OPEN_BATH. Not NutrientField. Not Erickson. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laned.LaneDD0Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="laned-d4" depends="compile"
+		description="Lane D D4 three-phase. LANE_D_LIFE_CYCLE. D4_THREE_PHASE. Feast then FCR freeze then Job 6 gamma(mu_eff). Death off while C>C_cut. Not LC1b. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laned.LaneDD4Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<target name="laned-d5" depends="compile"
+		description="Lane D D5 gates. LANE_D_LIFE_CYCLE. D5_GATES. Regression, memory coupling, feast-famine optimum, refuse concurrency. Not a C_s sweep. Not LC1 restage. Not NARMA.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.laned.LaneDD5Job"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+		</java>
+	</target>
+
+	<property name="a1.live.args" value="U_PULSE"/>
+
+	<target name="a1-live" depends="compile"
+		description="Live BSim Preview window for A1 on C1c_FILLED_POCKET. Viewer only. NOT_FIG4B.">
+		<java classpath="${coreLibs};${build}"
+			classname="bsim.a1.DaninoSIA1LivePreview"
+			dir="${basedir}"
+			fork="true" failonerror="true">
+			<arg line="${a1.live.args}"/>
+		</java>
+	</target>
+
     <target name="fatjar-bsim" depends="compile"
     	description="fatjar the latest version of bsim to be used in examples etc">
-        <fatjar.build output="${dist}/BSim${version}.jar">
-            <fatjar.manifest/>
-            <fatjar.filesource path="${build}" relpath="">
-            </fatjar.filesource>
-            <fatjar.jarsource file="${lib}/core.jar" relpath=""/>
-            <fatjar.jarsource file="${lib}/vecmath.jar" relpath=""/>
-            <fatjar.jarsource file="${lib}/objimport.jar" relpath=""/>
-        </fatjar.build>
+        <jar destfile="${dist}/BSim${version}.jar">
+            <fileset dir="${build}"/>
+            <zipgroupfileset dir="${lib}"
+            	includes="core.jar,vecmath.jar,objimport.jar,bsim-osp.jar,jcommander-1.49-SNAPSHOT.jar"/>
+        </jar>
     </target>
 	
 	<target name="clean"
 		description="clean up" >
 		<!-- Delete the ${build} directory tree -->
 		<delete dir="${build}"/>
+		<delete dir="${n0TestBuild}"/>
+		<delete dir="${p0Build}"/>
 	</target>
 </project>

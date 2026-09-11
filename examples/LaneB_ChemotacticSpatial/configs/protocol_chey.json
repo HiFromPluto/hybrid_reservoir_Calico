@@ -1,0 +1,20 @@
+{
+  "frozen_before_traces": true,
+  "status_label": "B4_CHEY_PROBE",
+  "object": "LANE_B_CHEMOTACTIC_SPATIAL",
+  "device": "LANE_B_CHEY_PROBE",
+  "narma": false,
+  "parent_fail_b0": "B0_MOTILITY_MEMORY",
+  "parent_fail_b1": "B1_PAINT_HOLD",
+  "parent_fail_b2": "B2_STRIPE_OCCUPY",
+  "parent_fail_b3": "B3_SUSTAINED_STRIPE",
+  "dL": 0.3,
+  "t_adapt_s": 5.0,
+  "t_total_s": 15.0,
+  "hold_mean_lo": 0.85,
+  "hold_mean_hi": 1.15,
+  "step_up_max_y": 0.88,
+  "step_down_min_y": 1.12,
+  "window_lo_s": 5.4,
+  "window_hi_s": 7.0
+}

@@ -1,0 +1,16 @@
+{
+  "no_task_labels": true,
+  "drives": [
+    {
+      "id": "STEP_ON",
+      "u_hold": 0.5,
+      "t_on_s": 9000.0,
+      "t_off_s": 0.0,
+      "r_Ru": "NA",
+      "plateau_last_fraction": 0.10,
+      "plateau_R_rel_tol": 0.05,
+      "sample_dt_s": 20.0,
+      "notes": "Occupancy drive. T0 plateau rule. Sample <= 60 s. r(R,u) is NA because u does not vary. No SINGLE_PULSE, no THROUGH_8."
+    }
+  ]
+}

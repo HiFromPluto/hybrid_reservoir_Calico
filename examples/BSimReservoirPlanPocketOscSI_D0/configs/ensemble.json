@@ -1,0 +1,63 @@
+{
+  "label": "PREDECLARED_UNSTATED_ICS",
+  "frozen_before_traces": true,
+  "primary_id": "SI_BASAL_PERTURB",
+  "si_ic_quote": "waves initiated by a localized initial condition (IN/2 = 1 while all other Ii = 0 and Ai = 0). the basal state with A = I = 0 is very weakly unstable. Bulk Hi, He, and Hi(t<0) are not stated.",
+  "arms": [
+    {
+      "id": "SI_BASAL_PERTURB",
+      "role": "PRIMARY",
+      "A": 0.0,
+      "I": 1.0,
+      "H_i": 0.0,
+      "H_e": 0.0,
+      "H_i_history": 0.0,
+      "history_equals_state": true,
+      "notes": "SI Fig.6 analogue I=1, A=0; unstated AHL basal 0; constant history = t=0 state"
+    },
+    {
+      "id": "SI_BASAL_REST",
+      "role": "LOW_AHL",
+      "A": 0.0,
+      "I": 0.0,
+      "H_i": 0.0,
+      "H_e": 0.0,
+      "H_i_history": 0.0,
+      "history_equals_state": true,
+      "notes": "low-AHL rest at SI basal A=I=0; constant history = t=0 state"
+    },
+    {
+      "id": "MODERATE_AHL",
+      "role": "MODERATE_AHL",
+      "A": 0.0,
+      "I": 1.0,
+      "H_i": 0.2,
+      "H_e": 0.2,
+      "H_i_history": 0.2,
+      "history_equals_state": true,
+      "notes": "moderate-AHL start; constant history = t=0 state"
+    },
+    {
+      "id": "HISTORY_OFFSET",
+      "role": "HISTORY_NEQ_STATE",
+      "A": 0.0,
+      "I": 1.0,
+      "H_i": 0.0,
+      "H_e": 0.0,
+      "H_i_history": 0.2,
+      "history_equals_state": false,
+      "notes": "constant Hi(t<0)=0.2 different from t=0 Hi=0"
+    },
+    {
+      "id": "FAILED_PRIOR_IVP",
+      "role": "FAILED_PRIOR_IVP",
+      "A": 0.0,
+      "I": 0.0,
+      "H_i": 1.0,
+      "H_e": 1.0,
+      "H_i_history": 1.0,
+      "history_equals_state": true,
+      "notes": "PocketOsc-SI ENGINEERING start. Negative control only."
+    }
+  ]
+}
